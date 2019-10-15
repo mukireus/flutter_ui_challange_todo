@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/design/ui_helper.dart';
 import 'package:todo/src/home.dart';
 
 void main() => runApp(MyApp());
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.indigo,
       ),
       home: Home(),
     );
