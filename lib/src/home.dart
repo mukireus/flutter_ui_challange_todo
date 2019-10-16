@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todo/design/ui_helper.dart';
+import 'package:todo/core/firebase_service.dart';
+import 'package:todo/core/model/group.dart';
+import 'package:todo/ui/shared/styles/widgets/custom_groups.dart';
+import 'package:todo/ui/ui_helper.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -7,6 +10,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  FirebaseService service = FirebaseService.getInstance();
+  List<Group> groupList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +29,7 @@ class _HomeState extends State<Home> {
               snap: true,
               backgroundColor: UIHelper.PRIMARY_COLOR,
               flexibleSpace: FlexibleSpaceBar(
+                titlePadding: EdgeInsets.fromLTRB(35, 0, 0, 16),
                 title: Text(
                   'To Do',
                   style: TextStyle(
@@ -56,10 +62,47 @@ class _HomeState extends State<Home> {
                 decoration: BoxDecoration(
                     color: UIHelper.WHITE,
                     borderRadius:
-                        BorderRadius.only(topLeft: Radius.circular(75.0))),
+                        BorderRadius.only(topLeft: Radius.elliptical(50, 60))),
+                child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 20, 0, 20),
+                    child: FutureBuilder(
+                      future: service.getGroups(),
+                      builder: (context, snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.done:
+                            if (snapshot.hasData) groupList = snapshot.data;
+                            return _listView;
+                            break;
+                          case ConnectionState.none:
+                            // TODO: Handle this case.
+                            break;
+                          case ConnectionState.waiting:
+                            // TODO: Handle this case.
+                            break;
+                          case ConnectionState.active:
+                            // TODO: Handle this case.
+                            break;
+                          default:
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                        }
+                      },
+                    )),
               ),
             )
           ],
         ));
   }
+
+  Widget get _listView => ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: groupList.length,
+        separatorBuilder: (context, index) => Divider(),
+        itemBuilder: (context, index) => CustomGroups(
+          groupName: groupList[index].groupName,
+          value: groupList[index].value,
+          taskCount: groupList[index].taskCount,
+        ),
+      );
 }

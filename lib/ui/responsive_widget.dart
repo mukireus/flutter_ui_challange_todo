@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/design/size_config.dart';
+import 'package:todo/ui/size_config.dart';
 
 class ResponsiveWidget extends StatelessWidget {
   final Widget portraitLayout;

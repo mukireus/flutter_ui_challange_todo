@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UIHelper {
   // PATH
@@ -13,16 +14,27 @@ class UIHelper {
   // COLOR
   static const Color PRIMARY_COLOR = Color.fromRGBO(45, 49, 172, 1);
   static const Color SECONDARY_COLOR = Color.fromRGBO(254, 170, 71, 100);
-  static const Color TEXT_COLOR = Colors.black;
+  static const Color TEXT_COLOR = Color(0x80000000);
+  static const Color SHADOW = Color(0x30000000);
   static const Color WHITE = Colors.white;
+  static const Color BLACK = Colors.black;
   static const Color TEST_COLOR = Color.fromRGBO(192, 192, 192, 100);
   static const Color CLICK_COLOR = Color.fromRGBO(254, 170, 71, 30);
   static const Color TEXTFIELD_COLOR = Color.fromRGBO(156, 166, 186, 100);
 
+  // UI COLOR RANDOM LIST
+
+  static const Color ORANGE = Color.fromRGBO(255, 190, 132, 1);
+  static const Color RED = Color.fromRGBO(255, 144, 143, 1);
+  static const Color CYAN = Color.fromRGBO(65, 218, 252, 1);
+  static const Color PURPLE = Color.fromRGBO(223, 135, 255, 1);
+  static const Color PINK = Color.fromRGBO(254, 138, 191, 1);
+  static const Color BLUE = Color.fromRGBO(120, 155, 255, 1);
+
   // SPACE
-  // static dynamicHeight(double height) => ScreenUtil.instance.setHeight(height);
-  // static dynamicWidth(double width) => ScreenUtil.instance.setWidth(width);
-  // static dynamicSp(double fontsize) => ScreenUtil.instance.setSp(fontsize);
+  static dynamicHeight(double height) => ScreenUtil.instance.setHeight(height);
+  static dynamicWidth(double width) => ScreenUtil.instance.setWidth(width);
+  static dynamicSp(double fontsize) => ScreenUtil.instance.setSp(fontsize);
 
   // FOR MARGIN OR PADDING
   static const double Space0 = 0;
