@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/firebase_service.dart';
 import 'package:todo/core/model/group.dart';
+import 'package:todo/ui/shared/styles/widgets/custom_card.dart';
 import 'package:todo/ui/shared/styles/widgets/custom_groups.dart';
 import 'package:todo/ui/ui_helper.dart';
 
@@ -65,7 +66,7 @@ class _HomeState extends State<Home> {
                         BorderRadius.only(topLeft: Radius.elliptical(50, 60))),
                 child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 20, 0, 20),
-                    child: FutureBuilder(
+                    child: FutureBuilder<List<Group>>(
                       future: service.getGroups(),
                       builder: (context, snapshot) {
                         switch (snapshot.connectionState) {
@@ -74,13 +75,16 @@ class _HomeState extends State<Home> {
                             return _listView;
                             break;
                           case ConnectionState.none:
-                            // TODO: Handle this case.
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
                             break;
                           case ConnectionState.waiting:
-                            // TODO: Handle this case.
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
                             break;
                           case ConnectionState.active:
-                            // TODO: Handle this case.
                             break;
                           default:
                             return Center(
@@ -95,14 +99,32 @@ class _HomeState extends State<Home> {
         ));
   }
 
-  Widget get _listView => ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: groupList.length,
-        separatorBuilder: (context, index) => Divider(),
-        itemBuilder: (context, index) => CustomGroups(
-          groupName: groupList[index].groupName,
-          value: groupList[index].value,
-          taskCount: groupList[index].taskCount,
+  Widget get _listView => Container(
+        child: Column(
+          children: <Widget>[
+            Flexible(
+              flex: 2,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: groupList.length,
+                separatorBuilder: (context, index) => Divider(),
+                itemBuilder: (context, index) => CustomGroups(
+                  groupName: groupList[index].groupName,
+                  completeTask: "${groupList[index].completeTask}",
+                  taskCount: "${groupList[index].taskCount}",
+                ),
+              ),
+            ),
+            Flexible(
+              flex: 3,
+              child: ListView.separated(
+                scrollDirection: Axis.vertical,
+                itemCount: 5,
+                separatorBuilder: (context, index) => Divider(),
+                itemBuilder: (context, index) => CustomCard(),
+              ),
+            ),
+          ],
         ),
       );
 }

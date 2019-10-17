@@ -4,10 +4,11 @@ import 'package:todo/ui/ui_helper.dart';
 
 class CustomGroups extends StatelessWidget {
   final String groupName;
-  final int taskCount;
-  final int value;
+  final String taskCount;
+  final String completeTask;
 
-  const CustomGroups({Key key, this.groupName, this.taskCount, this.value})
+  const CustomGroups(
+      {Key key, this.groupName, this.taskCount, this.completeTask})
       : super(key: key);
 
   @override
@@ -39,17 +40,18 @@ class CustomGroups extends StatelessWidget {
                   ],
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 10, 0, 0),
-                  child: ListView(
+                  padding: const EdgeInsets.fromLTRB(25, 50, 0, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text((this.value).toString() + " Görev",
+                        padding: const EdgeInsets.only(bottom: 15.0),
+                        child: Text((this.taskCount) + " Task",
                             style: TextStyle(
                                 fontSize: 20, color: UIHelper.TEXT_COLOR)),
                       ),
                       Text(
-                        "Hello",
+                        this.groupName,
                         style: TextStyle(
                             fontSize: 25,
                             color: UIHelper.BLUE,
@@ -59,7 +61,9 @@ class CustomGroups extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(0, 30, 25, 0),
                         child: LinearProgressIndicator(
                           backgroundColor: UIHelper.BLUE,
-                          value: 2 / 10,
+                          // TODO -> Random group color
+                          value: 1 / 5,
+                          // TODO -> Value değişimi çalışmıyor.
                         ),
                       )
                     ],

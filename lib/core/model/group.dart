@@ -1,21 +1,21 @@
 class Group {
   String groupName;
   int taskCount;
-  int value;
+  int completeTask;
   String key;
-  Group({this.groupName, this.taskCount, this.value});
+  Group({this.groupName, this.taskCount, this.completeTask});
 
   Group.fromJson(Map<String, dynamic> json) {
     groupName = json['groupName'];
     taskCount = json['taskCount'];
-    value = json['value'];
+    completeTask = json['completeTask'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['groupName'] = this.groupName;
     data['taskCount'] = this.taskCount;
-    data['value'] = this.value;
+    data['doneCount'] = this.completeTask;
     return data;
   }
 }
@@ -23,9 +23,9 @@ class Group {
 class GroupList {
   List<Group> groups = [];
 
-  GroupList.fromJsonList(Map value) {
-    value.forEach((key, value) {
-      var group = Group.fromJson(value);
+  GroupList.fromJsonList(Map completeTask) {
+    completeTask.forEach((key, completeTask) {
+      var group = Group.fromJson(completeTask);
       group.key = key;
       groups.add(group);
     });

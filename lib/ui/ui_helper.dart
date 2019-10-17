@@ -15,10 +15,10 @@ class UIHelper {
   static const Color PRIMARY_COLOR = Color.fromRGBO(45, 49, 172, 1);
   static const Color SECONDARY_COLOR = Color.fromRGBO(254, 170, 71, 100);
   static const Color TEXT_COLOR = Color(0x80000000);
-  static const Color SHADOW = Color(0x30000000);
+  static const Color SHADOW = Color(0x50000000);
   static const Color WHITE = Colors.white;
   static const Color BLACK = Colors.black;
-  static const Color TEST_COLOR = Color.fromRGBO(192, 192, 192, 100);
+  static const Color TEXT_COLOR_OPACITY = Color.fromRGBO(192, 192, 192, 100);
   static const Color CLICK_COLOR = Color.fromRGBO(254, 170, 71, 30);
   static const Color TEXTFIELD_COLOR = Color.fromRGBO(156, 166, 186, 100);
 
