@@ -8,7 +8,7 @@ class DrawCircle extends CustomPainter {
   DrawCircle() {
     _paint = Paint()
       ..color = UIHelper.PRIMARY_COLOR
-      ..strokeWidth = 10.0
+      ..strokeWidth = 15.0
       ..style = PaintingStyle.fill;
   }
 

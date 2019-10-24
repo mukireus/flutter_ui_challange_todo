@@ -23,11 +23,11 @@ class _CustomCardState extends State<CustomCard> {
         child: Column(
           children: <Widget>[
             Container(
-              height: UIHelper.dynamicHeight(200),
-              width: UIHelper.dynamicWidth(1000),
+              height: UIHelper.dynamicHeight(140),
+              width: UIHelper.dynamicWidth(900),
               decoration: BoxDecoration(
                 color: UIHelper.WHITE,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
                     color: UIHelper.SHADOW,
@@ -41,7 +41,7 @@ class _CustomCardState extends State<CustomCard> {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(25, 25, 0, 0),
+                padding: const EdgeInsets.fromLTRB(25, 15, 0, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -55,14 +55,14 @@ class _CustomCardState extends State<CustomCard> {
                             Text(
                               "Test",
                               style: TextStyle(
-                                  color: UIHelper.TEXT_COLOR,
-                                  fontSize: 25,
+                                  color: UIHelper.PRIMARY_COLOR,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
                               "Group",
                               style: TextStyle(
-                                  color: UIHelper.TEXT_COLOR_OPACITY,
+                                  color: UIHelper.PRIMARY_COLOR_OPACITY,
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold),
                             ),

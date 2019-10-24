@@ -6,25 +6,26 @@ class CustomGroups extends StatelessWidget {
   final String groupName;
   final String taskCount;
   final String completeTask;
+  final Color groupColor;
 
   const CustomGroups(
-      {Key key, this.groupName, this.taskCount, this.completeTask})
+      {Key key, this.groupName, this.taskCount, this.completeTask, this.groupColor})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil()..init(context);
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       child: InkWell(
         child: Column(
           children: <Widget>[
             Container(
-                width: UIHelper.dynamicWidth(400),
+                width: UIHelper.dynamicWidth(370),
                 height: UIHelper.dynamicHeight(450),
                 decoration: BoxDecoration(
                   color: UIHelper.WHITE,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
                       color: UIHelper.SHADOW,
@@ -48,14 +49,17 @@ class CustomGroups extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 15.0),
                         child: Text((this.taskCount) + " Task",
                             style: TextStyle(
-                                fontSize: 20, color: UIHelper.TEXT_COLOR)),
+                                fontSize: 17, color: UIHelper.TEXT_COLOR)),
                       ),
-                      Text(
-                        this.groupName,
-                        style: TextStyle(
-                            fontSize: 25,
-                            color: UIHelper.BLUE,
-                            fontWeight: FontWeight.bold),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          this.groupName,
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: UIHelper.PRIMARY_COLOR,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 30, 25, 0),

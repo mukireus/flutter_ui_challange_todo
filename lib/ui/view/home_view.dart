@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:todo/core/firebase_service.dart';
 import 'package:todo/core/model/group.dart';
 import 'package:todo/ui/shared/styles/widgets/custom_card.dart';
@@ -12,14 +13,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   FirebaseService service = FirebaseService.getInstance();
+  bool dialVisible = true;
+
   List<Group> groupList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: new FloatingActionButton(
-          onPressed: () {},
-          child: new Icon(Icons.add),
-        ),
+        floatingActionButton: _floatingActionButton,
         backgroundColor: UIHelper.PRIMARY_COLOR,
         body: CustomScrollView(
           slivers: <Widget>[
@@ -42,15 +42,15 @@ class _HomeState extends State<Home> {
               actions: <Widget>[
                 IconButton(
                   icon: Icon(Icons.search),
-                  iconSize: 30,
+                  iconSize: 35,
                   tooltip: "Search",
                   color: UIHelper.WHITE,
                   alignment: Alignment.centerLeft,
                   onPressed: () {},
                 ),
                 IconButton(
-                  icon: Icon(Icons.notifications),
-                  iconSize: 30,
+                  icon: Icon(Icons.notifications_none),
+                  iconSize: 35,
                   tooltip: "Notification",
                   color: UIHelper.WHITE,
                   onPressed: () {},
@@ -94,7 +94,7 @@ class _HomeState extends State<Home> {
                       },
                     )),
               ),
-            )
+            ),
           ],
         ));
   }
@@ -103,15 +103,18 @@ class _HomeState extends State<Home> {
         child: Column(
           children: <Widget>[
             Flexible(
-              flex: 2,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: groupList.length,
-                separatorBuilder: (context, index) => Divider(),
-                itemBuilder: (context, index) => CustomGroups(
-                  groupName: groupList[index].groupName,
-                  completeTask: "${groupList[index].completeTask}",
-                  taskCount: "${groupList[index].taskCount}",
+              flex: 3,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: groupList.length,
+                  separatorBuilder: (context, index) => Divider(),
+                  itemBuilder: (context, index) => CustomGroups(
+                    groupName: groupList[index].groupName,
+                    completeTask: "${groupList[index].completeTask}",
+                    taskCount: "${groupList[index].taskCount}",
+                  ),
                 ),
               ),
             ),
@@ -128,3 +131,40 @@ class _HomeState extends State<Home> {
         ),
       );
 }
+
+Widget get _floatingActionButton => SpeedDial(
+      // both default to 16
+      marginRight: 18,
+      marginBottom: 20,
+      animatedIcon: AnimatedIcons.add_event,
+      animatedIconTheme: IconThemeData(size: 22.0),
+      // this is ignored if animatedIcon is non null
+      // child: Icon(Icons.add),
+      //visible: dialVisible,
+      // If true user is forced to close dial manually
+      // by tapping main button and overlay is not rendered.
+      closeManually: false,
+      curve: Curves.easeIn,
+      overlayColor: Colors.black,
+      overlayOpacity: 0.5,
+      tooltip: 'Add',
+      //heroTag: 'speed-dial-hero-tag',
+      backgroundColor: UIHelper.PRIMARY_COLOR,
+      foregroundColor: Colors.white,
+      elevation: 8.0,
+      shape: CircleBorder(),
+      children: [
+        SpeedDialChild(
+          child: Icon(Icons.add),
+          backgroundColor: UIHelper.PRIMARY_COLOR,
+          label: 'Add Group',
+          labelStyle: TextStyle(fontSize: 18.0),
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.add),
+          backgroundColor: UIHelper.PRIMARY_COLOR,
+          label: 'Add Task',
+          labelStyle: TextStyle(fontSize: 18.0),
+        ),
+      ],
+    );
